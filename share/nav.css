@@ -1,0 +1,44 @@
+
+/* 导航栏 */
+
+.nav_ul{
+	width:100%;
+	height:40px;
+	top:-16;
+	left:0;
+	background:rgba(160,160,160,0.5);/*255 100*/
+	position:fixed;
+}
+
+.nav_ul li{
+	list-style:none;
+	float:left;
+	margin-right:10%;
+	margin-left:0;
+}
+
+.nav_ul li a{
+	text-decoration:none;
+	color:#fff;
+	display:block;
+	padding:10px 20px;
+}
+
+.nav_ul li a:hover{
+	border-bottom:2px solid rgba(255,255,255,1);/*70 0*/
+	color:rgba(255,255,255,1);/*70 0*/
+	background-color:rgba(255,255,255,0.5);/*255 70*/
+}
+
+.logo{
+	width:40px;
+	height:40px;
+	/*background-color:red;*/
+}
+
+.logo img{
+	width:40px;
+	height:40px;
+	margin-top:-10;
+	margin-left:-20;
+}
