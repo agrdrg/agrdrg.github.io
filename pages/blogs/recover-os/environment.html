@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>(´･_･`)</title>
+		<link rel="icon" href="" type="image/x-icon">
+		<link rel="StyleSheet" href="../../../style.css">
+		<link rel="StyleSheet" href="../../../share/aside.css">
+	</head>
+	<body>
+		<iframe class="nav_bar" src="../../../share/nav.html" width="100%" height="50px"></iframe>
+		<aside class="content">
+			<iframe class="main_aside_list" src="./share/aside.html"></iframe>
+		</aside>
+		<main>
+			<article class="main_article">
+				<h1>一、开发环境配置</h1>
+				<p>
+				所需要的全部软件：
+				Git (版本控制系统), GCC (C 编译器), NASM (汇编器), GNU Make (构建脚本), bochs (x86模拟器)。
+				</p>
+				<p>
+				上述软件基本上都是跨平台的，意味着绝大多数操作系统都可以安装这些软件。不过依然建议在Linux环境下使用。Linux可以利用网络下载，编译安装，或通过包管理工具安装这些软件。利用包管理工具可能是最方便的方法，但很可能安装到老旧版本的软件，推荐Manjaro等滚动更新发行版。只需要在Linux下安装这些软件并执行<code>git clone https://github.com/agrdrg/RecoverOS.git</code>克隆示例操作系统仓库，cd进入目录，执行<code>make run</code>就可以编译并启动模拟器了。如果你的开发工具上安装的是诸如Windows的发行版，依然可以通过双系统，虚拟机，WSL，docker等方式使用Linux（当然最好的方法还是再买台电脑专门安装Linux，但是花费不小，墙裂不推荐）。
+				</p>
+				<p>
+				下面仅仅介绍一下Windrows10 下利用Docker安装Arch Linux环境的方法。<br>
+				<ol>
+					<li>
+						右键左下角开始，选择Windows Powershell（管理员），选择确定。输入<code>wsl --install -d ubuntu</code> 并回车。此操作可以安装Windows的Linux子系统，为什么不直接用此子系统而要安装docker呢？原因是官方包过于老旧不能满足需求，而且Windows10 的WSL没有图形界面。此步骤需要保持网络畅通并且花费较多时间，若安装失败请借助搜索引擎自行解决。
+					</li>
+					<li>
+						打开<a target="_blank" href="https://www.docker.com">docker官网</a>，点击下方Windows图标下载docker desktop安装文件，并运行。安装时间不短，不过应该不会出什么问题。在docker官网右上角找到sign in字样点击进入，根据流程注册账号，需要邮箱，自行完成。
+					</li>
+					<li>
+						打开<a target="_blank" href="https://mobaxterm.mobatek.net/">MobaXterm官网</a>，中上方点击Download，选左边Free下"Download now"（有免费的干嘛要花69刀呢）。此软件主要是提供X服务。剩下没什么好说的。
+					</li>
+					<li>
+						新建空文件夹，名字随便。该文件夹下新建空文件，命名为Dockerfile（注意不要忘了删掉文件后缀）。用记事本打开（右键编辑），加入如下内容：<br>
+						<code>FROM archlinux:latest<br></code>
+						<code>RUN echo "Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist<br></code>
+						<code>RUN yes | pacman -Syu git gcc nasm make bochs<br></code>
+						保存并退出。
+					</li>
+					<li>
+						在该文件夹中右键，在MobaXterm中打开。输入<code>docker login</code>回车，输入账号密码登陆。再执行命令<code>docker build -t "你的用户名/arch:latest" . </code>就可以开始制作镜像了。下载可能要花费较长时间，如果失败请重试，或者蹭隔壁无线网络再重试。
+					</li>
+					<li>
+						执行命令<code>docker run -it -e DISPLAY=host.docker.internal:0.0 "你的用户名/arch:latest"</code>就可以创建并启动容器了。
+					</li>
+					<li>
+						输入exit可退出容器，执行命令<code>docker ps -a</code>可查看已创建的容器。执行命令<code>docker start -ia 容器名或容器ID</code>可再次启动容器。更多docker操作请执行<code>docker --help</code>或<code>docker 参数 --help</code>查看帮助。看不懂英文就百度docker相关操作。容器中安装的是发行版Arch Linux，有一定滚挂风险，请多多在闲着没事的时候，进入容器执行<code>pacman -Syu</code>更新系统。每天都可以更新，越频繁越好，建议每周至少更新一次。
+					</li>
+				</ol>
+				</p>
+				<p>
+				验证环境配置是否成功：
+				<ol>
+					<li>
+						进入容器，执行命令<code>git clone https://github.com/agrdrg/RecoverOS</code>克隆仓库。可能会克隆地非常慢甚至失败，若失败建议重试。
+					</li>
+					<li>
+						执行命令<code>cd RecoverOS</code>进入项目目录。执行命令<code>make run</code>编译并运行模拟器。然后就可以看到示例操作系统的界面了。
+					</li>
+					<li>
+						如果编译运行过程出错请自行寻找原因，找不到也没关系，以后再来编译。
+					</li>
+				</ol>
+				</p>
+				<p>
+				到此基本的编译、运行环境就配置完成了。现在还缺一个写代码的编辑器。你可以安装vim、Neovim、Emacs甚至vscode等代码编辑器。Arch Linux下可通过执行<code>pacman -S 软件名</code>安装相应软件。可以直接用这些工具编辑代码。要获得更舒服的开发体验，可能还需配置一番，不过这又是一个宏大的话题了，所以相关知识请自行了解。
+				</p>
+			</article>
+		</main>
+	</body>
+</html>

@@ -4,9 +4,9 @@
 .nav_ul{
 	width:100%;
 	height:40px;
-	top:-16;
+	top:0;
 	left:0;
-	background:rgba(160,160,160,0.5);/*255 100*/
+	background:rgba(160,160,160,0.5);
 	position:fixed;
 }
 
@@ -14,7 +14,6 @@
 	list-style:none;
 	float:left;
 	margin-right:10%;
-	margin-left:0;
 }
 
 .nav_ul li a{
@@ -25,20 +24,16 @@
 }
 
 .nav_ul li a:hover{
-	border-bottom:2px solid rgba(255,255,255,1);/*70 0*/
-	color:rgba(255,255,255,1);/*70 0*/
-	background-color:rgba(255,255,255,0.5);/*255 70*/
+	border-bottom:2px solid rgba(255,255,255,1);
+	color:rgba(255,255,255,1);
+	background-color:rgba(255,255,255,0.5);
 }
 
-.logo{
-	width:40px;
-	height:40px;
-	/*background-color:red;*/
+#logo{
+	padding:0 0 0 0;
 }
 
-.logo img{
-	width:40px;
+#logo img{
+	width:30px;
 	height:40px;
-	margin-top:-10;
-	margin-left:-20;
 }

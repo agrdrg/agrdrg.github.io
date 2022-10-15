@@ -8,65 +8,20 @@ body{
 }
 
 .nav_bar{
+	height:70px;
 	border:none;
-}
-
-/* 侧边栏 */
-
-/*
-#con_btn {
-	position: absolute;
-	top: 25%;
-	left: 20vw;
-	height: 75px;
-	border: 0;
-	border-left: 1px solid rgb(23, 32, 43, 0.2);
-	background: #AA0000;
-	color: #fff;
-	cursor: pointer;
-}*/
-
-.content {
-	float: left;
-	width: 20vw;
-	display: block;
-	border-radius:10px;
-	background:rgba(160,160,160,0.5);/*255 150*/
-	top:70px;
-	bottom:0;
 	position:fixed;
-	/*-moz-transition: margin-left 2s;*/
-	transition: margin-left 2s;
-	overflow-y:scroll;
+	top:0;
+	left:0;
 }
 
-aside ul li {
-	line-height: 40px;
-	border-top: 1px solid #fff;
-	border-bottom: 1px solid #fff;
-	list-style-type: none;
-	text-align: center;
+
+aside iframe{
+	width:100%;
+	height:calc(100% - 20px);
 }
 
-aside ul li * {
-	text-decoration: none;
-	color: #fff;
-	display: block;
-}
 
-aside ul li a:hover {
-	background:rgba(255,255,255,0.5);/*255 70*/
-}
-
-.profile_photo{
-	width:150px;
-	height:150px;
-	margin-left:3vw;
-	margin-top:1vw;
-	border-radius:75px;
-	background: url("./images/profile.png") no-repeat center;
-	background-size:150px;
-}
 
 main article {
 	background: rgba(169,160,160,0.1);/*255 70*/
@@ -76,9 +31,25 @@ main article {
 	top:70px;
 	bottom:0;
 	right:0;
-	font-size:2em;
-	text-align:center;
+	font:"JetBrains Mono" "Microsoft Yahei";
 	overflow-y:scroll;
+	line-height:1.5em;
+}
+
+main article > *{
+	margin-left:2%;
+	margin-right:2%;
+}
+
+
+a{
+	color:rgba(160,255,255);
+}
+
+code{
+	background:rgba(190,200,210,0.8);
+	color:rgb(0,0,0);
+	border-radius:4px;
 }
 
 .main_article{
