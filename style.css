@@ -1,5 +1,5 @@
 body{
-	background:center 0%/100% 100% no-repeat fixed url("images/background.jpg");
+	background:center 0%/100% 100% no-repeat fixed rgba(0,0,0) url("images/background.jpg");
 }
 
 .header{
