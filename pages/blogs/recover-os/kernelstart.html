@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>(´･_･`)</title>
+		<link rel="icon" href="" type="image/x-icon">
+		<link rel="StyleSheet" href="../../../style.css">
+		<link rel="StyleSheet" href="../../../share/aside.css">
+	</head>
+	<body>
+		<iframe class="nav_bar" src="../../../share/nav.html" width="100%" height="50px"></iframe>
+		<aside class="content">
+			<iframe class="main_aside_list" src="./share/aside.html"></iframe>
+		</aside>
+		<main>
+			<article class="main_article">
+				<h1>启动内核</h1>
+				<p>
+				新建工作目录并进入。新建boot，kernel，build三个目录。将RecoverOS/bochsrc，RecoverOS/boot/boot.asm复制到工作目录相应路径下。新建并编辑kernel/main.c文件，加入如下内容：<br>
+				<code>
+					int main(void) {<br>
+					&emsp;&emsp;*(short *)0xffff8000000b8000 = 'K' + (0x0c &lt;&lt; 8);<br>
+					&emsp;&emsp;*(short *)0xffff8000000b8002 = 'e' + (0x0c &lt;&lt; 8);<br>
+					&emsp;&emsp;*(short *)0xffff8000000b8004 = 'r' + (0x0c &lt;&lt; 8);<br>
+					&emsp;&emsp;*(short *)0xffff8000000b8006 = 'n' + (0x0c &lt;&lt; 8);<br>
+					&emsp;&emsp;*(short *)0xffff8000000b8008 = 'e' + (0x0c &lt;&lt; 8);<br>
+					&emsp;&emsp;*(short *)0xffff8000000b800a = 'l' + (0x0c &lt;&lt; 8);<br>
+					&emsp;&emsp;while (1) {}<br>
+					}<br>
+				</code>
+				执行<code>bximage</code>根据提示创建磁盘映像。选择'Create new floppy or hard disk image'前数字，其他基本一路回车。将创建的*.img文件命名为boot.img，并确定其大小大致为10M。然后依次执行以下命令：<br>
+				<code>
+					nasm boot/boot.asm -o build/boot.bin #编译bootloader<br>
+					gcc kernel/main.c -c -o build/main.o #编译main.c<br>
+					ld build/main.o -e main -Ttext 0xffff800000000800 -o build/kernel.bin #链接main.o<br>
+					dd if=build/boot.bin of=boot.img conv=notrunc #将bootloader写入磁盘<br>
+					dd if=build/kernel.bin of=boot.img bs=512 seek=3 conv=notrunc #将内核写入磁盘<br>
+					bochs #启动模拟器<br>
+				</code>
+				启动模拟器之后回车，直到出现模拟器黑色界面。输入c回车，不出意外的话，可以看到模拟器左上角出现红色Kernel字样。按键Ctrl+C，输入exit并回车即可退出。
+				</p>
+			</article>
+		</main>
+	</body>
+</html>

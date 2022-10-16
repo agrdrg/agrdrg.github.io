@@ -4,7 +4,7 @@
 	width: 20vw;
 	display: block;
 	border-radius:10px;
-	background:rgba(160,160,160,0.5);/*255 150*/
+	background:rgba(160,160,160,0.5);
 	top:70px;
 	bottom:0;
 	position:fixed;
@@ -27,17 +27,37 @@
 	display: block;
 }
 
-.aside_list li a:hover {
-	background:rgba(255,255,255,0.5);/*255 70*/
+li.net_plat{
+	height:60px;
+}
+
+li.net_plat *{
+	display:inline;
+	margin:10px 0px;
+}
+
+li.net_plat a svg{
+	border-radius:10px;
+	background:rgba(0,0,0,0.5);
+}
+
+
+.aside_list li a svg:hover {
+	background:rgba(255,255,255,0.5);
+	border-radius:10px;
+}
+
+
+.aside_list li:not(.net_plat) a:hover {
+	background:rgba(255,255,255,0.5);
 }
 
 .profile_photo{
-	width:150px;
-	height:150px;
-	margin-left:3vw;
-	margin-top:1vw;
-	border-radius:75px;
+	width:40vw;
+	height:40vw;
+	border-radius:20vw;
+	margin:5vw 20vw;
 	background: url("../images/profile.png") no-repeat center;
-	background-size:150px;
+	background-size:40vw;
 }
 
